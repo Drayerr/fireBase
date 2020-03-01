@@ -1,8 +1,9 @@
 import React from 'react';
 import { ScrollView, View, Text, TextInput, TouchableOpacity, Button } from 'react-native';
 import Styles from './Styles'
+import { connect } from 'react-redux'
 
-const Cadastro = ({navigation}) => {
+const Cadastro = ({navigation, ...props}) => {
   return (
     <View style={Styles.DadBox}>
 
@@ -11,9 +12,9 @@ const Cadastro = ({navigation}) => {
       </View>
 
       <View>
-        <TextInput style={Styles.loginBoxes} placeholder="E-mail"/>
-        <TextInput style={Styles.loginBoxes} placeholder="Senha"/>
-        <TextInput style={Styles.loginBoxes} placeholder=" Confirmar Senha"/>
+        <TextInput value={props.email} style={Styles.loginBoxes} placeholder="E-mail"/>
+        <TextInput value={props.senha} style={Styles.loginBoxes} placeholder="Senha"/>
+        <TextInput value={props.senha2} style={Styles.loginBoxes} placeholder=" Confirmar Senha"/>
       </View>
 
       <View style={Styles.other}>
@@ -23,4 +24,12 @@ const Cadastro = ({navigation}) => {
     </View>
   )
 }
-export default Cadastro;
+
+const mapStateToProps = (state) => (
+  {
+    email: state.autentication.email,
+    senha: state.autentication.senha,
+    senha2: state.autentication.senha2
+  }
+)
+export default connect(mapStateToProps, null)(Cadastro);

@@ -2,8 +2,9 @@ import React from 'react';
 import { ScrollView, View, Text, TextInput, TouchableOpacity, Button } from 'react-native';
 import Styles from './Styles'
 import { connect } from 'react-redux'
+import { modificaEmail, modificaSenha } from '../actions/actionsAutentication'
 
-const Home = ({ navigation }, props) => {
+const Home = ({ navigation, ...props }) => {
   return (
     <View style={Styles.DadBox}>
 
@@ -12,8 +13,8 @@ const Home = ({ navigation }, props) => {
       </View>
 
       <View>
-        <TextInput value={ props.email } style={Styles.loginBoxes} placeholder="E-mail" />
-        <TextInput value={ props.senha } style={Styles.loginBoxes} placeholder="Senha" />
+        <TextInput value={ props.email } style={Styles.loginBoxes} placeholder="E-mail" onChangeText={ texto => props.modificaEmail(texto) } />
+        <TextInput value={ props.senha } style={Styles.loginBoxes} placeholder="Senha" onChangeText={ texto => props.modificaSenha(texto) }/>
         <TouchableOpacity onPress={() => navigation.navigate("Cadastro")}>
           <Text>
             Ainda não tem cadastro? Cadastre-se
@@ -22,7 +23,7 @@ const Home = ({ navigation }, props) => {
       </View>
 
       <View style={Styles.other}>
-        <Button title="Acessar" color="grey" />
+        <Button title="Acessar" color="grey"/>
       </View>
 
     </View>
@@ -36,4 +37,4 @@ const mapStateToProps = (state) => (
   }
 )
 
-export default connect(mapStateToProps, null)(Home);
+export default connect(mapStateToProps, { modificaEmail, modificaSenha } )(Home);
