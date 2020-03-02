@@ -11,3 +11,10 @@ export const modificaSenha = (texto) => {
     payload: texto
   }
 }
+
+export const modificaContraSenha = (texto) => {
+  return {
+    type: 'modifica_contra_senha',
+    payload: texto
+  }
+}
