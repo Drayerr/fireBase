@@ -2,9 +2,19 @@ import React from 'react';
 import { ScrollView, View, Text, TextInput, TouchableOpacity, Button, Image } from 'react-native';
 import Styles from './Styles'
 import { connect } from 'react-redux'
-import { modificaEmail, modificaSenha, modificaContraSenha } from '../actions/actionsAutentication'
+import { modificaEmail, modificaSenha, modificaContraSenha, cadastraUser } from '../actions/actionsAutentication'
 
 const Cadastro = ({navigation, ...props}) => {
+
+  _cadastraUser = () =>
+   {
+    const email = props.email
+    const senha = props.senha
+    const senha2 = props.senha2
+    
+    props.cadastraUser({ email, senha, senha2})
+  }
+
   return (
     <View style={Styles.DadBox}>
 
@@ -19,7 +29,7 @@ const Cadastro = ({navigation, ...props}) => {
       </View>
 
       <View style={Styles.other}>
-        <Button title="Cadastrar" color="grey"/>
+        <Button title="Cadastrar" color="grey" onPress={() => _cadastraUser() }/>
       </View>
 
     </View>
@@ -33,4 +43,4 @@ const mapStateToProps = (state) => (
     senha2: state.autentication.senha2
   }
 )
-export default connect(mapStateToProps, { modificaEmail, modificaSenha, modificaContraSenha } )(Cadastro);
+export default connect(mapStateToProps, { modificaEmail, modificaSenha, modificaContraSenha, cadastraUser } )(Cadastro);
