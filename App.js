@@ -3,8 +3,8 @@ import 'react-native-gesture-handler'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import { ScrollView,View,Text } from 'react-native'
+import { createStore, applyMiddleware } from 'redux'
+import ReduxThunk from 'redux-thunk'
 import React from 'react'
 import firebase from 'firebase'
 
@@ -32,7 +32,6 @@ const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <Provider store={createStore(reducers)}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />

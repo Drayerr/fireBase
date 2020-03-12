@@ -26,6 +26,7 @@ const Cadastro = ({navigation, ...props}) => {
         <TextInput value={props.email} style={Styles.loginBoxes} placeholder="E-mail" onChangeText={ texto => props.modificaEmail(texto) }/>
         <TextInput secureTextEntry value={props.senha} style={Styles.loginBoxes} placeholder="Senha" onChangeText={ texto => props.modificaSenha(texto) }/>
         <TextInput secureTextEntry value={props.senha2} style={Styles.loginBoxes} placeholder=" Confirmar Senha" onChangeText={ texto => props.modificaContraSenha(texto) }/>
+        <Text style={{color:'red', fontSize: 18, paddingLeft: 8}}>{props.erroCadastro}</Text>
       </View>
 
       <View style={Styles.other}>
@@ -40,7 +41,8 @@ const mapStateToProps = (state) => (
   {
     email: state.autentication.email,
     senha: state.autentication.senha,
-    senha2: state.autentication.senha2
+    senha2: state.autentication.senha2,
+    erroCadastro: state.autentication.erroCadastro
   }
 )
 export default connect(mapStateToProps, { modificaEmail, modificaSenha, modificaContraSenha, cadastraUser } )(Cadastro);

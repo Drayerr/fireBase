@@ -22,17 +22,23 @@ export const modificaContraSenha = (texto) => {
 }
 
 export const cadastraUser = ({ email, senha, senha2}) => {
-  
-  if (senha != senha2) {
-    alert('As senhas não são iguais')
-  } else {
-    firebase.auth().createUserWithEmailAndPassword(email, senha)
-    .then( user => alert( "Conta criada com Sucesso!" ))
-    .catch( error => alert( error ))
-  }
-  
-
-  return {
-    type: 'teste'
+  return (dispatch) => {
+    if (senha != senha2) {
+      alert('As senhas não são iguais')
+    } else {
+      firebase.auth().createUserWithEmailAndPassword(email, senha)
+      .then( user => cadastoUsuarioSucesso(dispatch))
+      .catch( erro => cadastoUsuarioErro( erro, dispatch ))
+    }
   }
 }
+
+const cadastoUsuarioSucesso = (dispatch) => {
+    dispatch ({ type: 'sucesso' })
+  }
+
+const cadastoUsuarioErro = (erro, dispatch) => {
+    dispatch ({ type: 'cadastro_usuario_erro', payload: erro.message})
+
+
+  }
