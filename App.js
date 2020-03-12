@@ -32,6 +32,7 @@ const Stack = createStackNavigator();
 
 const App = () => {
   return (
+    <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={Home} />
